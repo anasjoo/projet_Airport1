@@ -1,5 +1,5 @@
 #include "connection.h"
-//test tutoriel Git
+//ici c est la gestion des bagages
 Connection::Connection()
 {
 
