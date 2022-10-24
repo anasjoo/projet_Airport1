@@ -1,5 +1,5 @@
 #include "connection.h"
-//ici c est la gestion des bagages
+//ici c est la gestion des bagages anas
 Connection::Connection()
 {
 
