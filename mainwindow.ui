@@ -10,18 +10,25 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTabWidget" name="Bagage">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>30</y>
+      <x>50</x>
+      <y>40</y>
       <width>631</width>
       <height>471</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(0, 255, 255);
+</string>
+    </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Enregistrement">
      <attribute name="title">
@@ -142,6 +149,22 @@
        </property>
       </item>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>190</y>
+        <width>181</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../Downloads/smartaer (3).png</pixmap>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Consultation">
      <attribute name="title">
@@ -155,19 +178,6 @@
         <width>581</width>
         <height>351</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="consulter">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>390</y>
-        <width>93</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>consulter</string>
       </property>
      </widget>
     </widget>
@@ -191,8 +201,8 @@
      <widget class="QLineEdit" name="id_bagageD_2">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>140</y>
+        <x>180</x>
+        <y>120</y>
         <width>113</width>
         <height>22</height>
        </rect>
@@ -201,14 +211,30 @@
      <widget class="QLabel" name="id_bagageD">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>140</y>
-        <width>81</width>
-        <height>16</height>
+        <x>70</x>
+        <y>120</y>
+        <width>91</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>Id_bagage</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>180</y>
+        <width>181</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../Downloads/smartaer (3).png</pixmap>
       </property>
      </widget>
     </widget>
@@ -329,6 +355,120 @@
       </property>
       <property name="text">
        <string>id_passager</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>180</y>
+        <width>181</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../Downloads/smartaer (3).png</pixmap>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Trier</string>
+     </attribute>
+     <widget class="QTableView" name="triBagage">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>581</width>
+        <height>351</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="TriBouton">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>390</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Trier</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Recherche</string>
+     </attribute>
+     <widget class="QLineEdit" name="id_bagageRecherche">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>20</y>
+        <width>113</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="id_bagageD_4">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Id_bagage</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="recherche">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>70</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>chercher</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="viewBagageRecherche">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>401</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>190</y>
+        <width>181</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../Downloads/smartaer (3).png</pixmap>
       </property>
      </widget>
     </widget>

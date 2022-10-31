@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "bagages.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,8 +23,15 @@ private slots:
 
     void on_Supprimer_clicked();
 
-    void on_consulter_clicked();
+  //  void on_consulter_clicked();
 
+    void on_Bagage_currentChanged(int index);
+
+   // void on_TriBouton_clicked();
+
+    void on_recherche_clicked();
+
+    void on_TriBouton_clicked();
 private:
     Ui::MainWindow *ui;
 };

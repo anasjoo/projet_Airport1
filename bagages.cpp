@@ -26,7 +26,7 @@ bool Bagages::ajouter(Ui::MainWindow *ui)
     QSqlQuery q;
 
 
-        q.prepare("INSERT into SA_BAGAGES(ID_BAGAGE,POIDS,TYPE, ID_PASSAGER) VALUES (:idBagage , :poids,:type, :idPassager)");
+        q.prepare("INSERT into BAGAGES(ID_BAGAGE,POIDS,TYPE, ID_PASSAGER) VALUES (:idBagage , :poids,:type, :idPassager)");
         q.bindValue(":idBagage",ui->id_bagage_2->text());
         q.bindValue(":idPassager",ui->id_passager_2->text());
         q.bindValue(":poids",ui->poids_2->text());
@@ -55,7 +55,7 @@ bool Bagages::ajouter(Ui::MainWindow *ui)
     bool Bagages::Modifier(Ui::MainWindow *ui)
 {
     QSqlQuery q;
-    q.prepare("update SA_BAGAGES set  ID_BAGAGE=:idBagage, POIDS=:poids,TYPE=:type,ID_PASSAGER=:idPassager where ID_BAGAGE=:idBagage" );
+    q.prepare("update BAGAGES set  ID_BAGAGE=:idBagage, POIDS=:poids,TYPE=:type,ID_PASSAGER=:idPassager where ID_BAGAGE=:idBagage" );
     q.bindValue(":idBagage",ui->UPbagage->text());
     q.bindValue(":idPassager",ui->UPpassager->text());
     q.bindValue(":poids",ui->UPpoids->text());
@@ -88,7 +88,7 @@ bool Bagages::supprimer(Ui::MainWindow *ui)
 {
     QSqlQuery q;
 
-         q.prepare("DELETE FROM SA_BAGAGES WHERE ID_BAGAGE ='"+ui->id_bagageD_2->text()+"'");
+         q.prepare("DELETE FROM BAGAGES WHERE ID_BAGAGE ='"+ui->id_bagageD_2->text()+"'");
 
 
          if(q.exec())
@@ -113,9 +113,29 @@ void Bagages::AfficherTable(Ui::MainWindow *ui)
 {
     QSqlQuery q;
     QSqlQueryModel *modal=new QSqlQueryModel();
-    q.prepare("select * from SA_BAGAGES");
+    q.prepare("select * from BAGAGES");
     q.exec();
     modal->setQuery(q);
+    //ui->viewBagage->setModel(modal);
     ui->viewBagage->setModel(modal);
+}
+  QSqlQueryModel *Bagages::trierBagages()
+{
+    QSqlQueryModel *model= new QSqlQueryModel() ;
+    model->setQuery("select * from BAGAGES order by POIDS");
+    // ui->triBagage->setModel(model);
+   return model ;
+
+}
+QSqlQueryModel *Bagages::rechercherBagages(QString id_Bagage)
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+        QSqlQuery query;
+        query.prepare("select * from BAGAGES where ID_BAGAGE= '"+id_Bagage+"' ");
+        //query.prepare("select * from BAGAGES where ID_BAGAGE ORDER BY ID_BAGAGE");
+        query.exec();
+        model->setQuery(query);
+        return model;
+
 }
 
