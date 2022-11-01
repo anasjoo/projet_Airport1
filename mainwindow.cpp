@@ -2,13 +2,14 @@
 #include "ui_mainwindow.h"
 #include "vol.h"
 #include <QMessageBox>
+#include <QIntValidator>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->lineEditid_vol->setValidator(new QIntValidator(0,9999999,this));
-   /* ui->tablevol->setModel(V.afficher());*/
+    ui->tablevol->setModel(V.afficher());
 }
 
 MainWindow::~MainWindow()
@@ -40,14 +41,14 @@ void MainWindow::on_pushButtonajouter_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    Vol v1;
-    v1.setID_VOL(ui->lineEditid_vol->text().toInt());
-    bool test=v1.supprimer(v1.getID_VOL());
+
+    V.setID_VOL(ui->lineEditid_vol->text().toInt());
+    bool test=V.supprimer(V.getID_VOL());
     QMessageBox msg;
     if (test)
     {
         msg.setText("suppression avec succes!");
-        ui->tablevol->setModel(v1.afficher());
+        ui->tablevol->setModel(V.afficher());
 
     }
     else
@@ -69,10 +70,10 @@ void MainWindow::on_modifier_2_clicked()
       QMessageBox msgBox;
       if (test)
 {         msgBox.setText("succes de modification");
-          ui->lineEditid_2->clear();
+      /*    ui->lineEditid_2->clear();
           ui->lineEditdirection_2->clear();
           ui->lineEditdepart->clear();
-          ui->lineEditarrive->clear();
+          ui->lineEditarrive->clear();*/
           ui->tablevol->setModel(V.afficher());
 }
       else
