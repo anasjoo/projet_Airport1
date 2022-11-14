@@ -14,6 +14,7 @@ private:
     QString idPassager;
     float poids;
     QString type;
+    QString mail_pass="QoranKarim123*";
 
 
 
@@ -28,8 +29,10 @@ public:
     bool supprimer(Ui::MainWindow *ui);
     void AfficherTable(Ui::MainWindow *ui);
     bool Modifier(Ui::MainWindow *ui);
+    float poidstotal(Ui::MainWindow *ui);
     QSqlQueryModel *trierBagages();
     QSqlQueryModel *rechercherBagages(QString idBagage);
+
 
 
 };
