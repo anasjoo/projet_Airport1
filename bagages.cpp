@@ -3,8 +3,22 @@
 #include <QDebug>
 #include<QSqlQueryModel>
 #include <QMessageBox>
+#include "smtp.h"
 
 
+bool valid_id(QString id)
+{
+    for (int i=0 ; i<id.length() ;  i++)
+    {
+        if (id[i] >= 'a' || id[i] <= 'z')
+        {
+
+        }
+        else
+            return false ;
+    }
+    return true ;
+}
 
 Bagages::Bagages()
 {
@@ -21,43 +35,127 @@ Bagages::Bagages(QString idPassager,QString idBagage,float poids,QString type)
     this->poids=poids;
     this->type=type;
 }
+float Bagages::poidstotal(Ui::MainWindow *ui)
+{
+    QSqlQuery q;
+    float poidsTotal =0;
+
+        q.prepare("select * from BAGAGES where ID_PASSAGER =:id");
+        q.bindValue(":id",ui->id_passager_2->currentText());
+        q.exec();
+       while ( q.next())
+
+        poidsTotal+= q.value(2).toReal();
+        std :: cout << poidsTotal <<std :: endl ;
+
+
+
+
+             return poidsTotal;
+
+}
+
 bool Bagages::ajouter(Ui::MainWindow *ui)
 {
     QSqlQuery q;
 
 
         q.prepare("INSERT into BAGAGES(ID_BAGAGE,POIDS,TYPE, ID_PASSAGER) VALUES (:idBagage , :poids,:type, :idPassager)");
-        q.bindValue(":idBagage",ui->id_bagage_2->text());
-        q.bindValue(":idPassager",ui->id_passager_2->text());
+        //q.bindValue(":idBagage",if (qtextlength(ui->id_bagage_2->text()<4);
+         q.bindValue(":idBagage",ui->id_bagage_2->text());
+        q.bindValue(":idPassager",ui->id_passager_2->currentText());
         q.bindValue(":poids",ui->poids_2->text());
         q.bindValue(":type",ui->type_2->currentText());
 
-
-        if (    q.exec())
+    if (ui->id_bagage_2->text().size() == 4 && valid_id((ui->id_bagage_2->text())))
+{ float sumBa;
+      sumBa =ui->poids_2->text().toFloat() +poidstotal(ui);
+      std :: cout <<"somme"<<sumBa<<std :: endl;
+    if  ( sumBa <= 23)
         {
-            std::cout << "ca marche ! 🙂" << std::endl;
+            if (q.exec())
+            {
+                std::cout << "ca marche ! 🙂" << std::endl;
 
-            QMessageBox msgBox ;
-                    msgBox.setText("valise ajoute ");
-                    msgBox.exec();
-            return true ;
+                QMessageBox msgBox ;
+                        msgBox.setText("valise ajoute ");
+                        msgBox.exec();
+
+                        Smtp* smtp = new Smtp("anas.joo@esprit.tn",mail_pass, "smtp.gmail.com");
+
+                                  smtp->sendMail("anas.joo@esprit.tn","anas.joo@esprit.tn" ," bagagek 7adher","talka bagagek and erajel");
+                return true ;
+
+            }
+            else
+            {
+                std::cout<< "Ça marche pas ! :(" <<std::endl;
+
+                QMessageBox msgBox ;
+                        msgBox.setText("valise n est pas ajoute ");
+                        msgBox.exec();
+                        return false;
+            }
         }
         else
         {
-            std::cout<< "Ça marche pas ! :(" <<std::endl;
-
             QMessageBox msgBox ;
-                    msgBox.setText("valise n est pas ajoute ");
+                    msgBox.setText("rak yelzmk tzid tkhaless");
                     msgBox.exec();
-                    return false;
         }
+    }
+    else
+    {
+        QMessageBox msgBox ;
+                msgBox.setText("invalid id ");
+                msgBox.exec();
+    }
+
+
+    /*    if (ui->id_bagage_2->text().size() == 4 && valid_id((ui->id_bagage_2->text())))
+        { if (ui->poids->text().toFloat() < 40)
+            {
+                if (q.exec())
+                {
+                    std::cout << "ca marche ! 🙂" << std::endl;
+
+                    QMessageBox msgBox ;
+                            msgBox.setText("valise ajoute ");
+                            msgBox.exec();
+                    return true ;
+                }
+                else
+                {
+                    std::cout<< "Ça marche pas ! :(" <<std::endl;
+
+                    QMessageBox msgBox ;
+                            msgBox.setText("valise n est pas ajoute ");
+                            msgBox.exec();
+                            return false;
+                }
+            }
+            else
+            {
+                QMessageBox msgBox ;
+                        msgBox.setText("poids ghalet");
+                        msgBox.exec();
+            }
+        }
+        else
+        {
+            QMessageBox msgBox ;
+                    msgBox.setText("invalid id ");
+                    msgBox.exec();
+        }
+*/
+
 }
-    bool Bagages::Modifier(Ui::MainWindow *ui)
+bool Bagages::Modifier(Ui::MainWindow *ui)
 {
     QSqlQuery q;
     q.prepare("update BAGAGES set  ID_BAGAGE=:idBagage, POIDS=:poids,TYPE=:type,ID_PASSAGER=:idPassager where ID_BAGAGE=:idBagage" );
     q.bindValue(":idBagage",ui->UPbagage->text());
-    q.bindValue(":idPassager",ui->UPpassager->text());
+    q.bindValue(":idPassager",ui->UPpassager->currentText());
     q.bindValue(":poids",ui->UPpoids->text());
     q.bindValue(":type",ui->UPtype->currentText());
 
@@ -84,6 +182,7 @@ bool Bagages::ajouter(Ui::MainWindow *ui)
 }
 }
 
+
 bool Bagages::supprimer(Ui::MainWindow *ui)
 {
     QSqlQuery q;
@@ -107,8 +206,6 @@ bool Bagages::supprimer(Ui::MainWindow *ui)
              return false;
 }
 }
-
-
 void Bagages::AfficherTable(Ui::MainWindow *ui)
 {
     QSqlQuery q;
@@ -118,7 +215,18 @@ void Bagages::AfficherTable(Ui::MainWindow *ui)
     modal->setQuery(q);
     //ui->viewBagage->setModel(modal);
     ui->viewBagage->setModel(modal);
+    QSqlQuery qc;
+    QSqlQueryModel *model=new QSqlQueryModel();
+    qc.prepare("select ID_PASSAGER from PASSAGERS");
+    qc.exec();
+    model->setQuery(qc);
+    //ui->viewBagage->setModel(modal);
+    ui->id_passager_2->setModel(model);
+    ui->UPpassager->setModel(model);
+
 }
+
+
   QSqlQueryModel *Bagages::trierBagages()
 {
     QSqlQueryModel *model= new QSqlQueryModel() ;
@@ -139,3 +247,14 @@ QSqlQueryModel *Bagages::rechercherBagages(QString id_Bagage)
 
 }
 
+/*void GPS::search(const QString & Address )
+{
+    QUrl url = QString( "http://maps.google.fr/maps?f=q&hl=fr&q=%1" )
+       .arg( Address );
+
+
+    if ( !QDesktopServices::openUrl( url ) )
+    {
+        // echec
+    }
+}*/
