@@ -17,8 +17,8 @@
    <widget class="QTabWidget" name="Bagage">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>30</y>
+      <x>30</x>
+      <y>20</y>
       <width>821</width>
       <height>491</height>
      </rect>
@@ -158,7 +158,7 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>-10</x>
+        <x>0</x>
         <y>20</y>
         <width>691</width>
         <height>371</height>
@@ -214,6 +214,52 @@
        <string>prendre une photo</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>270</y>
+        <width>56</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-120</y>
+        <width>1071</width>
+        <height>671</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../Downloads/g_voyageur (1).png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>10</y>
+        <width>191</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="imagenes.qrc">:/logo.PNG</pixmap>
+      </property>
+     </widget>
+     <zorder>label_7</zorder>
      <zorder>label_6</zorder>
      <zorder>Ajouter</zorder>
      <zorder>id_passager</zorder>
@@ -226,6 +272,8 @@
      <zorder>label_5</zorder>
      <zorder>id_passager_2</zorder>
      <zorder>camera</zorder>
+     <zorder>label</zorder>
+     <zorder>label_8</zorder>
     </widget>
     <widget class="QWidget" name="Consultation">
      <attribute name="title">
@@ -693,6 +741,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="imagenes.qrc"/>
+ </resources>
  <connections/>
 </ui>

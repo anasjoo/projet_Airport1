@@ -375,9 +375,9 @@ void MainWindow::on_imprimer_clicked()
     QString fileName = QFileDialog::getOpenFileName(0,"Open File",QString(),"PDF File(*.pdf)");
 
         QPrinter printer;
-        QPrintDialog *dlg = new QPrintDialog(&printer,0);
+        QPrintDialog *imp = new QPrintDialog(&printer,0);
 
-        if(dlg->exec() == QDialog::Accepted)
+        if(imp->exec() == QDialog::Accepted)
         {
             QImage pdf(fileName);
             QPainter painter(&printer);
@@ -385,7 +385,7 @@ void MainWindow::on_imprimer_clicked()
             painter.end();
         }
 
-        delete dlg;
+        delete imp;
 }
 
 

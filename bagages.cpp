@@ -70,6 +70,7 @@ bool Bagages::ajouter(Ui::MainWindow *ui)
     if (ui->id_bagage_2->text().size() == 4 && valid_id((ui->id_bagage_2->text())))
 { float sumBa;
       sumBa =ui->poids_2->text().toFloat() +poidstotal(ui);
+
       std :: cout <<"somme"<<sumBa<<std :: endl;
     if  ( sumBa <= 23)
         {
@@ -83,7 +84,7 @@ bool Bagages::ajouter(Ui::MainWindow *ui)
 
                         Smtp* smtp = new Smtp("anas.joo@esprit.tn",mail_pass, "smtp.gmail.com");
 
-                                  smtp->sendMail("anas.joo@esprit.tn","anas.joo@esprit.tn" ," bagagek 7adher","talka bagagek and erajel");
+                                  smtp->sendMail("anas.joo@esprit.tn","anas.joo@esprit.tn" ," cabine num : 1 'i' ","bagage enregistré");
                 return true ;
 
             }
@@ -100,7 +101,7 @@ bool Bagages::ajouter(Ui::MainWindow *ui)
         else
         {
             QMessageBox msgBox ;
-                    msgBox.setText("rak yelzmk tzid tkhaless");
+                    msgBox.setText("il faut payer pour un bagage supplémetaire");
                     msgBox.exec();
         }
     }
