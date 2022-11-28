@@ -1,0 +1,12 @@
+INPUT(
+./release\billet.o
+./release\excel.o
+./release\main.o
+./release\mainwindow.o
+./release\connection.o
+./release\qrcode.o
+./release\smtp.o
+./release\moc_excel.o
+./release\moc_mainwindow.o
+./release\moc_smtp.o
+);
