@@ -6,6 +6,7 @@
 #include "stat_combo.h"
 
 #include "smtp.h"
+#include "arduino.h"
 
 
 
@@ -57,12 +58,22 @@ void on_pushButton_envoyer_clicked();
 
 void on_pushButton_imprimer_clicked();
 
+//Arduino
+    void update_label();
+
+
 private:
     Ui::MainWindow *ui;
    Passager P;
 
    stat_combo *s;
  QStringList files;
+
+//Arduino
+ QByteArray data;
+ arduino A;
+ QSqlDatabase test_bd;
+
 };
 
 #endif // MAINWINDOW_H

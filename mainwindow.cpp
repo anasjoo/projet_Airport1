@@ -34,6 +34,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->LE_Tel->setValidator( new QIntValidator(00000001, 99999999, this));
 ui->tab_passager->setModel(P.afficher());
+
+QSettings settings(QSettings::IniFormat, QSettings::UserScope,
+                   QCoreApplication::organizationName(), QCoreApplication::applicationName());
+
+
+  ui->WebBrowser->dynamicCall("Navigate(const QString&)", "https://www.google.com/maps/place/A%C3%A9roport+de+Tunis-Carthage/@36.8475605,10.2149852,17z/data=!3m1!4b1!4m5!3m4!1s0x12e2cad2e1d7f1bb:0x902488d100b5819b!8m2!3d36.8475562!4d10.2175601");
+//Arduino
+
+  int ret =A.connect_arduino();//lancer la connection to arduino
+      switch (ret) {
+
+      case(0):qDebug()<<"arduino is available and connect to : "<<A.getarduino_port_name();
+          break;
+      case(1):qDebug()<<"arduino is available and not  connect to : "<<A.getarduino_port_name();
+          break;
+      case(-1):qDebug()<<"arduino is not available ";
+          break;
+
+      }
+      QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -181,9 +203,9 @@ void MainWindow::on_pushButton_PDF_clicked()
     painter.drawText(300,3300,"CIN");
     painter.drawText(2000,3300,"Nom");
     painter.drawText(3800,3300,"Tel");
-    painter.drawText(5700,3300,"Destination");
-    painter.drawText(7300,3300,"Date naissance");
-     painter.drawText(9000,3300,"Prénom");
+    painter.drawText(5000,3300,"Destination");
+    painter.drawText(6500,3300,"Date naissance");
+     painter.drawText(8800,3300,"Prénom");
 
     QString date= currDate() ;
     painter.drawText(8500,30,date);
@@ -196,9 +218,9 @@ void MainWindow::on_pushButton_PDF_clicked()
         painter.drawText(200,i,query.value(0).toString());
         painter.drawText(1900,i,query.value(1).toString());
         painter.drawText(3500,i,query.value(2).toString());
-        painter.drawText(5900,i,query.value(3).toString());
-        painter.drawText(7300,i,query.value(4).toString());
-        painter.drawText(9000,i,query.value(5).toString());
+        painter.drawText(5300,i,query.value(3).toString());
+        painter.drawText(6500,i,query.value(4).toString());
+        painter.drawText(8800,i,query.value(5).toString());
 
         i = i + 500;
     }
@@ -284,6 +306,51 @@ void MainWindow::on_pushButton_imprimer_clicked()
 
 
     delete dlg;
+
+}
+//arduino
+
+void MainWindow::update_label()
+{
+    Connection c;
+
+    data=A.read_from_arduino();
+
+    ui->label_arduino->setText(data);
+
+    QSqlQuery query(test_bd);
+    QString select = "SELECT ID_PASSAGER from PASSAGERS where ID_PASSAGER=?";
+    qDebug() << select;
+    query.prepare(select);
+    query.addBindValue(ui->label_arduino->text());
+    query.exec();
+   if (query.exec())
+    {
+
+        int count=0;
+        while (query.next())
+        {
+            count++;
+        }
+        if (count==1)
+        {
+
+            A.write_to_arduino("1");
+            ui->label_arduino->setText("Welcome ");
+
+        }
+
+         else if (count<1)
+        {
+            A.write_to_arduino("0");
+
+        }
+    }
+   if (data=="2"){
+         ui->label_arduino->setText("No More Places");
+
+   }
+    //afficher on si les données reçues par arduino est 1
 
 }
 

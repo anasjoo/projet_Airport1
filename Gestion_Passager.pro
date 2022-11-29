@@ -9,7 +9,7 @@ QT       += core gui sql printsupport charts
 QT += printsupport
 QT       += core gui sql network multimedia multimediawidgets charts printsupport widgets axcontainer
 
-QT +=network
+QT +=network serialport
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -31,6 +31,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
@@ -39,12 +40,14 @@ SOURCES += \
     stat_combo.cpp
 
 HEADERS += \
+    arduino.h \
         mainwindow.h \
     connection.h \
     passager.h \
     smtp.h \
     stat.h \
-    stat_combo.h
+    stat_combo.h \
+    webaxwidget.h
 
 FORMS += \
         mainwindow.ui \
