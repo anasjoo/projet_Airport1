@@ -16,6 +16,7 @@ void on_pushButton_clicked();
 #include <QDebug>
 #include <QDialog>
 #include "camera.h"
+#include "arduino.h"
 
 namespace Ui {
 class MainWindow;void on_stat_clicked();
@@ -55,6 +56,8 @@ private slots:
     void on_tel_clicked();
 void on_sendsms_clicked();
 
+void update_label();   // slot permettant la mise à jour du label état de la lampe 1,
+// ce slot est lancé à chaque réception d'un message de Arduino
 
 
 private:
@@ -63,6 +66,10 @@ private:
     QString mail_pass="QoranKarim123*";
 
     camera *c;
+
+    QByteArray data; // variable contenant les données reçues
+
+    Arduino A; // objet temporaire
 
 };
 

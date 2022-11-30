@@ -34,6 +34,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
      //ui->viewBagage->SetModel(b.AfficherTable(ui));
+
+    int ret=A.connect_arduino(); // lancer la connexion à arduino
+    switch(ret){
+    case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+        break;
+    case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+       break;
+    case(-1):qDebug() << "arduino is not available";
+    }
+     QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+     //le slot update_label suite à la reception du signal readyRead (reception des données).
+
 }
 
 
@@ -41,6 +53,20 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+    qDebug()<< data ;
+     // double tmpF = data.toFloat();
+
+    // ui->poids_2->setText(QString::number(tmpF));
+    ui->poids_2->setText(ui->poids_2->text()+data);
+
+}
+
+
+
 void MainWindow::on_Ajouter_clicked()
 {
     QSound s("C:/Users/chino/Downloads/click.wav");

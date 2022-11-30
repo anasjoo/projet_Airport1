@@ -3,10 +3,7 @@
 # Project created by QtCreator 2018-10-26T21:45:23
 #
 #-------------------------------------------------
-QT       += core gui sql network multimedia multimediawidgets charts printsupport widgets axcontainer
-QT       += core gui sql
-QT       += printsupport
-QT += network
+QT       += core gui sql network multimedia multimediawidgets charts printsupport widgets axcontainer serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = gestion_bagage
@@ -26,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
     bagages.cpp \
     camera.cpp \
     gpsvalise.cpp \
@@ -37,6 +35,7 @@ SOURCES += \
     smtp.cpp
 
 HEADERS += \
+    arduino.h \
     bagages.h \
     camera.h \
     gpsvalise.h \
