@@ -55,9 +55,14 @@ private slots:
     void on_camera_clicked();void on_imprimer_clicked();
     void on_tel_clicked();
 void on_sendsms_clicked();
+void update_label();
+ void on_pushButton_clicked();
+ void on_login_clicked();
+ void on_logout_clicked();
+ void on_gestionBagage_clicked();
+ void on_retourner_clicked();
 
-void update_label();   // slot permettant la mise à jour du label état de la lampe 1,
-// ce slot est lancé à chaque réception d'un message de Arduino
+
 
 
 private:
@@ -70,6 +75,7 @@ private:
     QByteArray data; // variable contenant les données reçues
 
     Arduino A; // objet temporaire
+
 
 };
 

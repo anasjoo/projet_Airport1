@@ -444,3 +444,48 @@ void MainWindow::on_sendsms_clicked()
 
         ui->subject->clear();
 }
+
+
+
+void MainWindow::on_pushButton_clicked()
+{
+
+     ui->stackedWidget->setCurrentIndex(3);
+}
+
+
+
+void MainWindow::on_login_clicked()
+{
+
+    QString username = ui->lineEdit->text();
+        QString password = ui->lineEdit_2->text();
+
+        if(username == "ANAS" && password == "root")//||(username == "CRM" && password == "CRM"))
+        {
+            QMessageBox::information(this, "Login" , "Username and Password is correct");
+
+            ui->stackedWidget->setCurrentIndex(2);
+
+
+
+        }
+        else
+        {
+            QMessageBox::warning(this, "Login", "Username and Password is not correct");
+        }
+}
+void MainWindow::on_logout_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_gestionBagage_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_retourner_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(2);
+}
