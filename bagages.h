@@ -15,7 +15,7 @@ private:
     float poids;
     QString type;
     QString mail_pass="QoranKarim123*";
-
+//comment
 
 
 
