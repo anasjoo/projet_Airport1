@@ -2,10 +2,12 @@
 #include <QApplication>
 #include <QMessageBox>
 #include "connection.h"
+#include "billet.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    Billet B ;
     Connection c;
     bool test=c.createconnect();
     if(test)
@@ -16,7 +18,7 @@ int main(int argc, char *argv[])
 
 }
     else
-        QMessageBox::critical(nullptr, QObject::tr("database is not open"),
+        QMessageBox::information(nullptr, QObject::tr("database is not open"),
                     QObject::tr("connection failed.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
 

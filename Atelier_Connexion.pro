@@ -5,9 +5,12 @@
 #-------------------------------------------------
 
 QT       += core gui sql
-
+QT       +=sql
+QT       +=printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+QT       +=network
+QT       +=svg
+QT       +=serialport
 TARGET = Atelier_Connexion
 TEMPLATE = app
 
@@ -25,13 +28,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
+    billet.cpp \
+    excel.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    qrcode.cpp \
+    smtp.cpp
 
 HEADERS += \
+    arduino.h \
+    billet.h \
+    excel.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    qrcode.h \
+    smtp.h
 
 FORMS += \
         mainwindow.ui
