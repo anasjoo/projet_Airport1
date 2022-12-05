@@ -1,0 +1,39 @@
+#include "etudiant.h"
+#include <QSqlQuery>
+#include <QtDebug>
+
+
+Etudiant::Etudiant(int id,QString nom ,QString prenom)
+{
+    this->id=id;
+    this->nom=nom;
+    this->prenom=prenom;
+}
+
+
+int Etudiant::getid(){return id;}
+QString Etudiant::getnom(){return nom;}
+QString Etudiant::getprenom(){return prenom;}
+
+void Etudiant::setid(int id){this ->id=id;}
+void Etudiant::setnom(QString nom){this ->nom=nom;}
+void Etudiant::setprenom(QString prenom){this ->prenom=prenom;}
+
+
+
+
+bool Etudiant::ajouter()
+
+{bool test=false; 
+    
+    QSqlQuery query;
+          query.prepare("INSERT INTO person (id, forename, surname) "
+                        "VALUES (:id, :forename, :surname)");
+          query.bindValue(":id", 1001);
+          query.bindValue(":forename", "Bart");
+          query.bindValue(":surname", "Simpson");
+          query.exec();
+     
+return test;
+}
+
