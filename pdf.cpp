@@ -6,8 +6,8 @@
 #include <QFileDialog>
 #include <QPdfWriter>
 #include <QPainter>
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "mainwindow_Bagage.h"
+#include "ui_mainwindow_Bagage.h"
 #include "bagages.h"
 #include <QSqlQuery>
 pdf::pdf(QWidget *parent) :

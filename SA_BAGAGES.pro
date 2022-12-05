@@ -27,9 +27,11 @@ SOURCES += \
     bagages.cpp \
     camera.cpp \
     gpsvalise.cpp \
+    login.cpp \
         main.cpp \
-        mainwindow.cpp \
     connection.cpp \
+    mainwindow_Bagage.cpp \
+    menu.cpp \
     pdf.cpp \
     qcustomplot.cpp \
     smtp.cpp
@@ -39,15 +41,19 @@ HEADERS += \
     bagages.h \
     camera.h \
     gpsvalise.h \
-        mainwindow.h \
+    login.h \
     connection.h \
+    mainwindow_Bagage.h \
+    menu.h \
     pdf.h \
     qcustomplot.h \
     smtp.h
 
 FORMS += \
         camera.ui \
-        mainwindow.ui \
+        login.ui \
+        mainwindow_Bagage.ui \
+        menu.ui \
         pdf.ui
 
 # Default rules for deployment.

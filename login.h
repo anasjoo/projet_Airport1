@@ -1,29 +1,28 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <QAbstractItemModel>
+#include <QDialog>
+#include "menu.h"
 
-class login : public QAbstractItemModel
+namespace Ui {
+class Login;
+}
+
+class Login : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit login(QObject *parent = nullptr);
+    explicit Login(QWidget *parent = nullptr);
+    ~Login();
 
-    // Header:
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
-
-    // Basic functionality:
-    QModelIndex index(int row, int column,
-                      const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+private slots:
+    void on_login_clicked();
 
 private:
+    Ui::Login *ui;
+    Menu m ;
+
 };
 
 #endif // LOGIN_H
