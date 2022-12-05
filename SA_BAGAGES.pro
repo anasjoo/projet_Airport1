@@ -4,6 +4,9 @@
 #
 #-------------------------------------------------
 QT       += core gui sql network multimedia multimediawidgets charts printsupport widgets axcontainer serialport
+QT       +=network
+QT       +=svg
+QT       +=serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = gestion_bagage
@@ -21,45 +24,78 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
+QMAKE_CXXFLAGS+= -std=gnu++14
 
 SOURCES += \
     arduino.cpp \
+    avion.cpp \
+    avions.cpp \
     bagages.cpp \
+    billet.cpp \
     camera.cpp \
+    employee.cpp \
+    employer.cpp \
+    excel.cpp \
+    gestion_passager.cpp \
+    gestion_vol.cpp \
     gpsvalise.cpp \
     login.cpp \
         main.cpp \
     connection.cpp \
     mainwindow_Bagage.cpp \
+    mainwindowayoub.cpp \
     menu.cpp \
+    passager.cpp \
     pdf.cpp \
     qcustomplot.cpp \
-    smtp.cpp
+    qrcode.cpp \
+    smtp.cpp \
+    stat_combo.cpp \
+    vol.cpp
 
 HEADERS += \
     arduino.h \
+    avion.h \
+    avions.h \
     bagages.h \
+    billet.h \
     camera.h \
+    employee.h \
+    employer.h \
+    excel.h \
+    gestion_passager.h \
+    gestion_vol.h \
     gpsvalise.h \
     login.h \
     connection.h \
     mainwindow_Bagage.h \
+    mainwindowayoub.h \
     menu.h \
+    passager.h \
     pdf.h \
     qcustomplot.h \
-    smtp.h
+    qrcode.h \
+    smtp.h \
+    stat.h \
+    stat_combo.h \
+    vol.h \
+    webaxwidget.h
 
 FORMS += \
+        avions.ui \
         camera.ui \
+        employer.ui \
         login.ui \
         mainwindow_Bagage.ui \
+        mainwindowayoub.ui \
         menu.ui \
-        pdf.ui
+        passager.ui \
+        pdf.ui \
+        stat_combo.ui \
+        vol.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    imagenes.qrc

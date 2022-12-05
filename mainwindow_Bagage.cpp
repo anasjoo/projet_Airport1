@@ -146,7 +146,7 @@ void MainWindow::on_TriBouton_clicked()
         s.play();
 
     Bagages *b= new Bagages();
-    ui->triBagage->setModel(b->trierBagages());
+    ui->viewBagage->setModel(b->trierBagages());
 
 }
 
@@ -447,3 +447,8 @@ void MainWindow::on_sendsms_clicked()
 
 
 
+
+void MainWindow::on_retourner_clicked()
+{
+    hide();
+}

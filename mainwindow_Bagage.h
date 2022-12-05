@@ -58,6 +58,8 @@ void on_sendsms_clicked();
 void update_label();
 
 
+void on_retourner_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStringList files;

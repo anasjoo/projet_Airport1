@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>camera</class>
- <widget class="QDialog" name="camera">
+ <class>stat_combo</class>
+ <widget class="QDialog" name="stat_combo">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1109</width>
-    <height>851</height>
+    <width>749</width>
+    <height>552</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -970,41 +970,20 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
 
 </string>
   </property>
-  <widget class="QPushButton" name="takeImageButton">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <widget class="QLabel" name="label_stat">
    <property name="geometry">
     <rect>
-     <x>21</x>
-     <y>441</y>
-     <width>901</width>
-     <height>28</height>
+     <x>140</x>
+     <y>60</y>
+     <width>400</width>
+     <height>400</height>
     </rect>
    </property>
    <property name="text">
-    <string>Capture Photo</string>
-   </property>
-  </widget>
-  <widget class="QCameraViewfinder" name="viewfinder" native="true">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>883</width>
-     <height>383</height>
-    </rect>
+    <string/>
    </property>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QCameraViewfinder</class>
-   <extends>QWidget</extends>
-   <header>qcameraviewfinder.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

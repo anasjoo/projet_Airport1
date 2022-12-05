@@ -43,7 +43,8 @@ void Login::on_login_clicked()
     user = query.value(0).toString();
     pswd = query.value(1).toString();
     if (username == user && password == pswd)
-    {QStringList myOptions;
+    {
+        QStringList myOptions;
         myOptions << "yosr" << "anas" << "amir" << "aziz" <<"nessrin"<<"ayoub"<< "admin";
         switch(myOptions.indexOf(user))
         {
@@ -86,7 +87,7 @@ void Login::on_login_clicked()
                    m.ui->gestionBillet->setEnabled(false);
                    m.ui->gestionAvion->setEnabled(false);
             break ;
-        case 4 :
+        case 4 ://nessrin
             hide();
                     m.show();
                     m.ui->gestionBagage->setEnabled(false);

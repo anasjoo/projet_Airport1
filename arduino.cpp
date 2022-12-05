@@ -1,5 +1,8 @@
 #include "arduino.h"
-
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QSqlDatabase>
+#include <QObject>
 Arduino::Arduino()
 {
     data="";
@@ -20,6 +23,7 @@ QSerialPort *Arduino::getserial()
 int Arduino::connect_arduino()
 {   // recherche du port sur lequel la carte arduino identifée par  arduino_uno_vendor_id
     // est connectée
+    serialbuffer="";
     foreach (const QSerialPortInfo &serial_port_info, QSerialPortInfo::availablePorts()){
            if(serial_port_info.hasVendorIdentifier() && serial_port_info.hasProductIdentifier()){
                if(serial_port_info.vendorIdentifier() == arduino_uno_vendor_id && serial_port_info.productIdentifier()
@@ -59,23 +63,42 @@ int Arduino::close_arduino()
 
  QByteArray Arduino::read_from_arduino()
 {
-    if(serial->isReadable()){
-         data=serial->readAll(); //récupérer les données reçues
 
+    if(serial->isReadable()){
+        serial->waitForReadyRead(20);
+         data=serial->readAll();
          return data;
     }
  }
 
+ int Arduino::chercherid(QString id){
 
+     QSqlDatabase bd = QSqlDatabase::database();
+
+         QSqlQuery query;
+         query.prepare("SELECT ID FROM BILLET WHERE ID=:id");
+  query.bindValue(":id", id);
+         query.exec();
+         if (query.next())
+         {
+
+              return 1;
+         }
+         else {
+             return -1;
+         }
+}
+ QByteArray Arduino::getdata()
+ {
+     return data;
+ }
 int Arduino::write_to_arduino( QByteArray d)
-
 {
 
     if(serial->isWritable()){
         serial->write(d);  // envoyer des donnés vers Arduino
-    }else{
+    }else
+    {
         qDebug() << "Couldn't write to serial!";
     }
-
-
 }
