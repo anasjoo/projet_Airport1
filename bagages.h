@@ -2,8 +2,8 @@
 #define BAGAGES_H
 #include <Qstring>
 #include <iostream>
-#include "ui_MainWindow.h"
-#include "MainWindow.h"
+#include "ui_mainwindow_Bagage.h"
+#include "mainwindow_Bagage.h"
 #include <QtSql/QSqlQueryModel>
 
 
