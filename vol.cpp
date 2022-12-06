@@ -2,23 +2,24 @@
 #include <QSqlQuery>
 #include<QtDebug>
 #include<QObject>
+#include <QString>
 Vol::Vol()
 {
-ID_VOL=0;
+ID_VOL="";
 DIRECTION="";
 ARRIVE_VOL="";
 DEPART_VOL="";
 
 }
 
-Vol::Vol (int ID_VOL, QString DIRECTION,QString ARRIVE_VOL,QString DEPART_VOL)
+Vol::Vol (QString ID_VOL,QString ARRIVE_VOL,QString DEPART_VOL, QString DIRECTION)
 {
     this->ID_VOL=ID_VOL;
-    this->DIRECTION=DIRECTION;
     this->ARRIVE_VOL=ARRIVE_VOL;
     this->DEPART_VOL=DEPART_VOL;
+    this->DIRECTION=DIRECTION;
 }
-int Vol::getID_VOL()
+QString Vol::getID_VOL()
 {
     return ID_VOL;
 }
@@ -34,7 +35,7 @@ QString Vol::getDEPART_VOL()
 {
     return DEPART_VOL;
 }
-void Vol::setID_VOL(int ID_VOL)
+void Vol::setID_VOL(QString ID_VOL)
 {
     this->ID_VOL=ID_VOL;
 }
@@ -55,13 +56,13 @@ bool Vol::ajouter()
 
 
     QSqlQuery query;
-    QString ID_string=QString::number(ID_VOL);
-    query.prepare("INSERT INTO Vol (ID_VOL, DIRECTION, DEPART_VOL,ARRIVE_VOL) "
-                  "VALUES (:ID_VOL, :DIRECTION, :DEPART_VOL, :ARRIVE_VOL)");
-    query.bindValue(":ID_VOL",ID_string);
-    query.bindValue(":DIRECTION",DIRECTION );
+
+    query.prepare("INSERT INTO Vol (ID_VOL,ARRIVE_VOL,DEPART_VOL,DIRECTION) "
+                  "VALUES (:ID_VOL,:ARRIVE_VOL, :DEPART_VOL, :DIRECTION)");
+    query.bindValue(":ID_VOL",ID_VOL);
     query.bindValue(":ARRIVE_VOL", ARRIVE_VOL);
     query.bindValue(":DEPART_VOL", DEPART_VOL);
+    query.bindValue(":DIRECTION",  DIRECTION );
     return query.exec();
 
 
@@ -69,28 +70,91 @@ bool Vol::ajouter()
 QSqlQueryModel* Vol::afficher()
 {
   QSqlQueryModel* model=new QSqlQueryModel();
-  model->setQuery("SELECT* FROM Vol");
+  model->setQuery("SELECT* FROM VOL");
   model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_VOL"));
-  model->setHeaderData(1, Qt::Horizontal, QObject::tr("DIRECTION"));
   model->setHeaderData(2, Qt::Horizontal, QObject::tr("DEPART_VOL"));
-  model->setHeaderData(3, Qt::Horizontal, QObject::tr("ARRIVE_VOL"));
+  model->setHeaderData(1, Qt::Horizontal, QObject::tr("ARRIVE_VOL"));
+  model->setHeaderData(3, Qt::Horizontal, QObject::tr("DIRECTION"));
   return model;
 }
-bool Vol::supprimer(int ID_VOL)
+bool Vol::supprimer(QString ID_VOL)
 {
     QSqlQuery query ;
-    query.prepare("DELETE from vol where ID_VOL=:ID_VOL") ;
-    query.bindValue(":ID_VOL", ID_VOL);
+    query.prepare("DELETE from VOL where ID_VOL=:ID_VOL") ;
+    query.bindValue(":ID_VOL",ID_VOL);
     return query.exec();
 }
-bool Vol::modifier(int id)
+bool Vol::modifier(QString ID_VOL)
 {
     QSqlQuery query;
-    query.prepare("UPDATE Vol SET ID_VOL= :ID_VOL,DIRECTION= :DIRECTION,DEPART_DATE= :DEPART_DATE");
+
+    query.prepare("UPDATE VOL SET ID_VOL=:ID_VOL,ARRIVE_VOL=:ARRIVE_VOL,DEPART_VOL=:DEPART_VOL,DIRECTION=:DIRECTION WHERE ID_VOL=:ID_VOL");
     query.bindValue(":ID_VOL",ID_VOL);
-    query.bindValue(":DIRCTION",DIRECTION);
     query.bindValue(":DEPART_VOL",DEPART_VOL);
-    query.bindValue(":ARRIVE_DEPART",ARRIVE_VOL);
+    query.bindValue(":ARRIVE_VOL",ARRIVE_VOL);
+    query.bindValue(":DIRECTION",DIRECTION);
+
+
     return query.exec();
+
+}
+QSqlQueryModel *Vol::rechercher(QString rech)
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+        model->setQuery("select * from VOL where ID_VOL LIKE '"+rech+"%'");
+    return model;
+}
+
+QSqlQueryModel *Vol::tri(){
+
+   QSqlQuery *q = new QSqlQuery();
+   QSqlQueryModel *model = new QSqlQueryModel();
+   q->prepare("SELECT * FROM VOL ORDER BY DIRECTION ");
+   q->exec();
+   model->setQuery(*q);
+
+   return model;
+}
+
+QSqlQueryModel *Vol::trid(){
+
+   QSqlQuery *q = new QSqlQuery();
+   QSqlQueryModel *model = new QSqlQueryModel();
+   q->prepare("SELECT * FROM VOL ORDER BY DIRECTION DESC");
+   q->exec();
+   model->setQuery(*q);
+
+   return model;
+}
+bool Vol::modifier_emploi(QString ID_VOL, QString DEPART_VOL, QString ARRIVE_VOL)
+{
+   QSqlQuery query;
+    DEPART_VOL=("d MMM yyyy h:m");
+    ARRIVE_VOL=("d MMM yyyy h:m");
+    QString date_string = DEPART_VOL + ARRIVE_VOL;
+
+    query.prepare("UPDATE VOL set ARRIVE_VOL=:reserv where ID_VOL=:ID_VOL");
+    query.bindValue(":ID_VOL", ID_VOL);
+    query.bindValue(":reserv", date_string);
+
+    return query.exec();
+}
+
+bool Vol::ajouterMessage(QString ID_VOL )
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Vol SET DIRECTION=:DIRECTION WHERE ID_VOL=:ID_VOL");
+    query.bindValue(":ID_VOL",ID_VOL);
+    query.bindValue(":DIRECTION",DIRECTION);
+    return query.exec();
+}
+
+QSqlQueryModel * Vol::afficherMessage(){
+    QSqlQueryModel *model=new QSqlQueryModel();
+    model->setQuery("SELECT ID_VOL,DIRECTION FROM Vol where ID_VOL IS NOT NULL ");
+
+
+    return model;
 
 }
