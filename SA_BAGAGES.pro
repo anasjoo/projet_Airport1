@@ -21,40 +21,61 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
+QMAKE_CXXFLAGS+= -std=gnu++14
 
 SOURCES += \
     arduino.cpp \
     bagages.cpp \
     camera.cpp \
+    employee.cpp \
+    employer.cpp \
+    gestion_passager.cpp \
+    gestion_vol.cpp \
     gpsvalise.cpp \
     login.cpp \
         main.cpp \
     connection.cpp \
     mainwindow_Bagage.cpp \
     menu.cpp \
+    passager.cpp \
     pdf.cpp \
     qcustomplot.cpp \
-    smtp.cpp
+    smtp.cpp \
+    stat_combo.cpp \
+    vol.cpp
 
 HEADERS += \
     arduino.h \
     bagages.h \
     camera.h \
+    employee.h \
+    employer.h \
+    gestion_passager.h \
+    gestion_vol.h \
     gpsvalise.h \
     login.h \
     connection.h \
     mainwindow_Bagage.h \
     menu.h \
+    passager.h \
     pdf.h \
     qcustomplot.h \
-    smtp.h
+    smtp.h \
+    stat.h \
+    stat_combo.h \
+    vol.h \
+    webaxwidget.h
 
 FORMS += \
         camera.ui \
+        employer.ui \
         login.ui \
         mainwindow_Bagage.ui \
         menu.ui \
-        pdf.ui
+        passager.ui \
+        pdf.ui \
+        stat_combo.ui \
+        vol.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

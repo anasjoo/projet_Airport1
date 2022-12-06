@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "ui_menu.h"
 #include "login.h"
+#include "passager.h"
 
 
 Menu::Menu(QWidget *parent) :
@@ -25,4 +26,20 @@ void Menu::on_logout_clicked()
 {
     Login l ;
     l.show();
+}
+
+void Menu::on_gestionPasager_clicked()
+{
+    yosr.show();
+}
+
+void Menu::on_gestionVol_clicked()
+{
+    nessrin.show();
+
+}
+
+void Menu::on_gestionEmployee_clicked()
+{
+    aziz.show();
 }

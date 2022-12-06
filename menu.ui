@@ -54,7 +54,7 @@
     <item>
      <widget class="QPushButton" name="gestionEmployee">
       <property name="text">
-       <string>GESTION EMPLYEE</string>
+       <string>GESTION EMPLOYEE</string>
       </property>
      </widget>
     </item>
