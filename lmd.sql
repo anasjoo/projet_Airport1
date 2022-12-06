@@ -1,0 +1,1 @@
+insert into nom_table (va1,va2,...,vn);
